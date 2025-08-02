@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroLeak.AI - Revenue Leakage Analyzer</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>📉 ZeroLeak.AI</h1>
+                    <p>Revenue Leakage Analyzer for Startups</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-secondary" onclick="showHelp()">❓ Help</button>
+                    <button class="btn-secondary" onclick="showAbout()">ℹ️ About</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section id="upload-section" class="upload-section">
+                <div class="upload-card">
+                    <div class="upload-header">
+                        <h2>🚀 Get Started</h2>
+                        <p>Upload your financial data to detect revenue leaks and optimize your business</p>
+                    </div>
+                    
+                    <div class="upload-area" id="upload-area">
+                        <div class="upload-icon">📁</div>
+                        <h3>Drop your file here</h3>
+                        <p>or click to browse</p>
+                        <input type="file" id="file-input" accept=".csv,.xlsx,.xls" style="display: none;">
+                    </div>
+                    
+                    <div class="upload-info">
+                        <h4>📋 Supported Formats:</h4>
+                        <ul>
+                            <li>CSV files (.csv)</li>
+                            <li>Excel files (.xlsx, .xls)</li>
+                        </ul>
+                        
+                        <h4>📊 Expected Data Columns:</h4>
+                        <ul>
+                            <li>Date (transaction date)</li>
+                            <li>Amount (transaction amount)</li>
+                            <li>Customer (customer name/ID)</li>
+                            <li>Description (transaction description)</li>
+                            <li>Category (optional)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analysis Section -->
+            <section id="analysis-section" class="analysis-section" style="display: none;">
+                <div class="analysis-header">
+                    <h2>🔍 Analysis in Progress</h2>
+                    <p>Our AI agents are analyzing your data for revenue leaks...</p>
+                </div>
+                
+                <div class="loading-animation">
+                    <div class="spinner"></div>
+                    <div class="loading-text">
+                        <p>🤖 AI Agent 1: Scanning for billing anomalies...</p>
+                        <p>🔍 AI Agent 2: Detecting duplicate transactions...</p>
+                        <p>📊 AI Agent 3: Analyzing payment patterns...</p>
+                        <p>💡 AI Agent 4: Generating insights...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="results-section" style="display: none;">
+                <div class="results-header">
+                    <h2>📊 Analysis Complete</h2>
+                    <p>Here's what our AI discovered about your revenue leaks</p>
+                </div>
+                
+                <div id="analysis-results" class="analysis-results">
+                    <!-- Results will be populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 ZeroLeak.AI - Powered by Advanced AI Analytics</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+                    <a href="#" onclick="showTerms()">Terms of Service</a>
+                    <a href="#" onclick="showContact()">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="help-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('help-modal')">&times;</span>
+            <h2>❓ How to Use ZeroLeak.AI</h2>
+            <div class="help-content">
+                <h3>📁 Step 1: Prepare Your Data</h3>
+                <p>Export your financial data from your accounting system, payment processor, or CRM. Make sure it includes:</p>
+                <ul>
+                    <li><strong>Date:</strong> When the transaction occurred</li>
+                    <li><strong>Amount:</strong> Transaction value (positive for revenue, negative for refunds)</li>
+                    <li><strong>Customer:</strong> Customer name or ID</li>
+                    <li><strong>Description:</strong> What the transaction was for</li>
+                    <li><strong>Category:</strong> Optional classification</li>
+                </ul>
+
+                <h3>📤 Step 2: Upload Your File</h3>
+                <p>Drag and drop your CSV or Excel file into the upload area, or click to browse and select your file.</p>
+
+                <h3>🔍 Step 3: AI Analysis</h3>
+                <p>Our AI agents will automatically scan your data for:</p>
+                <ul>
+                    <li>Duplicate transactions</li>
+                    <li>Failed payments</li>
+                    <li>Refund patterns</li>
+                    <li>Billing anomalies</li>
+                    <li>Customer churn indicators</li>
+                </ul>
+
+                <h3>📊 Step 4: Review Results</h3>
+                <p>Get detailed insights with:</p>
+                <ul>
+                    <li>Visual charts and graphs</li>
+                    <li>Priority-ranked issues</li>
+                    <li>Actionable recommendations</li>
+                    <li>Downloadable reports</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="about-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('about-modal')">&times;</span>
+            <h2>ℹ️ About ZeroLeak.AI</h2>
+            <div class="about-content">
+                <h3>🎯 Our Mission</h3>
+                <p>ZeroLeak.AI helps early-stage and growth startups identify and fix revenue leaks through advanced AI-powered analytics.</p>
+
+                <h3>🤖 AI-Powered Analysis</h3>
+                <p>Our multi-agent AI system uses sophisticated algorithms to detect:</p>
+                <ul>
+                    <li>Billing and payment anomalies</li>
+                    <li>Customer behavior patterns</li>
+                    <li>Operational inefficiencies</li>
+                    <li>Revenue optimization opportunities</li>
+                </ul>
+
+                <h3>🔒 Privacy & Security</h3>
+                <p>Your data is processed securely and never stored permanently. All analysis happens in real-time and is deleted after processing.</p>
+
+                <h3>💡 Built for Startups</h3>
+                <p>Designed specifically for the unique challenges faced by early-stage and growth companies, with actionable insights that drive real results.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
